@@ -5,6 +5,7 @@ import {
   ICreateCategoryController,
   ICreateCategoryRepository,
 } from "./interfaces";
+import { isValidCreateCategoryParams } from "./utils";
 
 export class CreateCategoryController implements ICreateCategoryController {
   constructor(
@@ -20,19 +21,38 @@ export class CreateCategoryController implements ICreateCategoryController {
       if (!body) {
         return {
           statusCode: 400,
-          body: "You need to provide a body",
+          body: {
+            statusCode: 400,
+            message: "You must provide a body",
+          },
         };
       }
-      const user = await this.categoriesRepository.createCategory(body);
+
+      const result = isValidCreateCategoryParams(body);
+
+      if(result.success === false) {
+        return {
+          statusCode: 400,
+          body: {
+            statusCode: 400,
+            message: JSON.parse(result.error.message),
+          }
+        };
+      }
+
+      const category = await this.categoriesRepository.createCategory(body);
 
       return {
         statusCode: 201,
-        body: user,
+        body: category,
       };
     } catch (error) {
       return {
         statusCode: 500,
-        body: error.message,
+        body: {
+          statusCode: 500,
+          message: error.message,
+        },
       };
     }
   }

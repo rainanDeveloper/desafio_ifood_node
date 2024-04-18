@@ -17,7 +17,10 @@ export class GetCategoriesController implements IGetCategoriesController {
     catch (err) {
       return {
         statusCode: 500,
-        body: err.message
+        body: {
+          statusCode: 500,
+          message: err.message
+        }
       };
     }
   }
