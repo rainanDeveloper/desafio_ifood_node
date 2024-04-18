@@ -3,6 +3,8 @@ import { CreateCategoryController } from "../../controller/create-category/creat
 import { GetCategoriesController } from "../../controller/get-categories/get-categories.controller";
 import { CreateCategoryMongoRepository } from "../../repositories/create-category/create-category-mongo.repository";
 import { GetCategoriesMongoRepository } from "../../repositories/get-categories/get-categories-mongo.repository";
+import { UpdateCategoryMongoRepository } from "../../repositories/update-category/update-category-mongo.repository";
+import { UpdateCategoryController } from "../../controller/update-category/update-category.controller";
 
 const categoryRouter = Router();
 
@@ -29,14 +31,14 @@ categoryRouter.post("", async (req, res) => {
 });
 
 categoryRouter.patch("/:id", async (req, res) => {
-  const updateCategoryRepository = new CreateCategoryMongoRepository();
-  const createCategoriesController = new CreateCategoryController(
+  const updateCategoryRepository = new UpdateCategoryMongoRepository();
+  const updateCategoryController = new UpdateCategoryController(
     updateCategoryRepository
   );
 
   const { params, body } = req;
 
-  const updatedCategory = await createCategoriesController.handle({params, body});
+  const updatedCategory = await updateCategoryController.handle({params, body});
 
   res.status(updatedCategory.statusCode).json(updatedCategory.body);
 });

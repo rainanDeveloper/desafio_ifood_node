@@ -3,8 +3,8 @@ import {
   IUpdateCategoryRepository,
   UpdateCategoryParams,
 } from "src/controller/update-category/interfaces";
-import { MongoDBClient } from "src/database/mongo";
-import { Category } from "src/models/categories";
+import { MongoDBClient } from "../../database/mongo";
+import { Category } from "../../models/categories";
 
 export class UpdateCategoryMongoRepository implements IUpdateCategoryRepository
 {
