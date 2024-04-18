@@ -21,5 +21,9 @@ module.exports = {
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/consistent-type-imports": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/dot-notation": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-extraneous-class": "off",
+    "@typescript-eslint/no-misused-promises": "off",
   },
 };

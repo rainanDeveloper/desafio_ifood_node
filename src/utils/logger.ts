@@ -7,9 +7,7 @@ export class Logger {
       level,
       format: winston.format.json(),
       defaultMeta: { service: context?.toUpperCase() || "MAIN" },
-      transports: [
-        new winston.transports.Console(),
-      ],
+      transports: [new winston.transports.Console()],
     });
   }
 
