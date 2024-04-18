@@ -17,9 +17,6 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "resolveJsonModule": true,
-    "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "*": ["*"]
-    }
+    "noFallthroughCasesInSwitch": false
   }
 }

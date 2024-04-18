@@ -5,6 +5,8 @@ import { CreateCategoryMongoRepository } from "../../repositories/create-categor
 import { GetCategoriesMongoRepository } from "../../repositories/get-categories/get-categories-mongo.repository";
 import { UpdateCategoryMongoRepository } from "../../repositories/update-category/update-category-mongo.repository";
 import { UpdateCategoryController } from "../../controller/update-category/update-category.controller";
+import { DeleteCategoryMongoRepository } from "../../repositories/delete-category/delete-category-mongo.repository";
+import { DeleteCategoryController } from "../../controller/delete-category/delete-category.controller";
 
 const categoryRouter = Router();
 
@@ -41,6 +43,19 @@ categoryRouter.patch("/:id", async (req, res) => {
   const updatedCategory = await updateCategoryController.handle({params, body});
 
   res.status(updatedCategory.statusCode).json(updatedCategory.body);
+});
+
+categoryRouter.delete("/:id", async (req, res) => {
+  const deleteCategoryRepository = new DeleteCategoryMongoRepository();
+  const deleteCategoryController = new DeleteCategoryController(
+    deleteCategoryRepository
+  );
+
+  const { params } = req;
+
+  const deletedCategory = await deleteCategoryController.handle({params});
+
+  res.status(deletedCategory.statusCode).json(deletedCategory.body);
 });
 
 export default categoryRouter;
