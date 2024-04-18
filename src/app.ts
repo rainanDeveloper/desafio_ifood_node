@@ -1,10 +1,9 @@
 import * as express from "express";
+import router from "./routes";
 
 const app = express();
 
-app.get("/", (_req, res) => {
-  res.send("Hello World!");
-});
+app.use("/api", router);
 
 app.use(express.json());
 

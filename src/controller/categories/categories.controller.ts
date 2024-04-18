@@ -1,6 +1,6 @@
 import { Category } from "src/models/categories";
-import { ICategoriesController, ICategoriesRepository } from "./protocols";
-import { HttpResponse } from "../protocols";
+import { ICategoriesController, ICategoriesRepository } from "./interfaces";
+import { HttpResponse } from "../interfaces";
 
 export class CategoriesController implements ICategoriesController {
   constructor(private readonly categoriesRepository: ICategoriesRepository) {}
