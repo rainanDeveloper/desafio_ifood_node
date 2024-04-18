@@ -28,4 +28,17 @@ categoryRouter.post("", async (req, res) => {
   res.status(createdCategory.statusCode).json(createdCategory.body);
 });
 
+categoryRouter.patch("/:id", async (req, res) => {
+  const updateCategoryRepository = new CreateCategoryMongoRepository();
+  const createCategoriesController = new CreateCategoryController(
+    updateCategoryRepository
+  );
+
+  const { params, body } = req;
+
+  const updatedCategory = await createCategoriesController.handle({params, body});
+
+  res.status(updatedCategory.statusCode).json(updatedCategory.body);
+});
+
 export default categoryRouter;
