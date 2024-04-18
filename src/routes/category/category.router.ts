@@ -7,6 +7,8 @@ import { UpdateCategoryMongoRepository } from "../../repositories/update-categor
 import { UpdateCategoryController } from "../../controller/update-category/update-category.controller";
 import { DeleteCategoryMongoRepository } from "../../repositories/delete-category/delete-category-mongo.repository";
 import { DeleteCategoryController } from "../../controller/delete-category/delete-category.controller";
+import { FindCategoryMongoRepository } from "../../repositories/find-category/find-category-mongo.repository";
+import { FindCategoryController } from "../../controller/find-category/find-category.controller";
 
 const categoryRouter = Router();
 
@@ -19,6 +21,19 @@ categoryRouter.get("", async (_req, res) => {
   const categories = await categoriesController.handle();
 
   res.status(categories.statusCode).json(categories.body);
+});
+
+categoryRouter.get("/:id", async (req, res) => {
+  const findCategoryRepository = new FindCategoryMongoRepository();
+  const findCategoryController = new FindCategoryController(
+    findCategoryRepository
+  );
+
+  const { params } = req;
+
+  const category = await findCategoryController.handle({ params });
+
+  res.status(category.statusCode).json(category.body);
 });
 
 categoryRouter.post("", async (req, res) => {
