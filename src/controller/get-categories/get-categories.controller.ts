@@ -1,11 +1,11 @@
 import { Category } from "src/models/categories";
-import { ICategoriesController, ICategoriesRepository } from "./interfaces";
+import { IGetCategoriesController, IGetCategoriesRepository } from "./interfaces";
 import { HttpResponse } from "../interfaces";
 
-export class CategoriesController implements ICategoriesController {
-  constructor(private readonly categoriesRepository: ICategoriesRepository) {}
+export class GetCategoriesController implements IGetCategoriesController {
+  constructor(private readonly categoriesRepository: IGetCategoriesRepository) {}
 
-  async getCategories(): Promise<HttpResponse<Category[]>> {
+  async handle(): Promise<HttpResponse<Category[]>> {
     try{
       const categories = await this.categoriesRepository.getCategories();
 
