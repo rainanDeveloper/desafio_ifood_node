@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import { IFindCategoryRepository } from "../../controller/find-category/interfaces";
 import { MongoDBClient } from "../../database/mongo";
-import { Category } from "../../models/categories";
+import { Category } from "../../models/category";
 
 export class FindCategoryMongoRepository implements IFindCategoryRepository {
   async findCategory(id: string): Promise<Category> {

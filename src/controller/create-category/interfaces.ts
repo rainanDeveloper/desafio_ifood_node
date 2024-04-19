@@ -1,4 +1,4 @@
-import { Category } from "../../models/categories";
+import { Category } from "../../models/category";
 import { HttpRequest, HttpResponse } from "../interfaces";
 
 export interface ICreateCategoryController {

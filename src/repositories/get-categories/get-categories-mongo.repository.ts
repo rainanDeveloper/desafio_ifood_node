@@ -1,6 +1,6 @@
 import { IGetCategoriesRepository } from "src/controller/get-categories/interfaces";
 import { MongoDBClient } from "../../database/mongo";
-import { Category } from "../../models/categories";
+import { Category } from "../../models/category";
 
 export class GetCategoriesMongoRepository implements IGetCategoriesRepository {
   async getCategories(): Promise<Category[]> {

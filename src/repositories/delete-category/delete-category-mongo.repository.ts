@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import { IDeleteCategoryRepository } from "../../controller/delete-category/interfaces";
 import { MongoDBClient } from "../../database/mongo";
-import { Category } from "../../models/categories";
+import { Category } from "../../models/category";
 
 export class DeleteCategoryMongoRepository implements IDeleteCategoryRepository {
   async deleteCategory(id: string): Promise<void> {
