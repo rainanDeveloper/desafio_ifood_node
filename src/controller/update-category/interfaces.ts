@@ -1,4 +1,4 @@
-import { Category } from "src/models/categories";
+import { Category } from "src/models/category";
 import { HttpRequest, HttpResponse } from "../interfaces";
 
 export interface UpdateCategoryParams {

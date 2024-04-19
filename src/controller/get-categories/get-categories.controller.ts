@@ -1,4 +1,4 @@
-import { Category } from "src/models/categories";
+import { Category } from "../../models/category";
 import { IGetCategoriesController, IGetCategoriesRepository } from "./interfaces";
 import { HttpResponse } from "../interfaces";
 
