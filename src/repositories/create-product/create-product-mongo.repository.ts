@@ -20,8 +20,8 @@ export class CreateProductMongoRepository implements ICreateProductRepository {
     const { _id, ...rest } = product;
 
     return {
-        id: _id.toString(),
-       ...rest,
+      id: _id.toString(),
+      ...rest,
     } as Product;
   }
 }
