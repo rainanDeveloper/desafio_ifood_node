@@ -1,4 +1,5 @@
-import { Product } from "src/models/product";
+import { Product } from "../../models/product";
+import { HttpRequest, HttpResponse } from "../interfaces";
 
 export interface CreateProductParams {
     title: string;
@@ -10,4 +11,8 @@ export interface CreateProductParams {
 
 export interface ICreateProductRepository {
     createProduct(params: CreateProductParams): Promise<Product>;
+}
+
+export interface ICreateProductController {
+    handle(httpRequest: HttpRequest<CreateProductParams>): Promise<HttpResponse<Product>>;
 }

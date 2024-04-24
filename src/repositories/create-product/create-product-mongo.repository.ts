@@ -1,8 +1,8 @@
-import { MongoDBClient } from "../../database/mongo";
 import {
   CreateProductParams,
   ICreateProductRepository,
 } from "../../controller/create-product/interfaces";
+import { MongoDBClient } from "../../database/mongo";
 import { Product } from "../../models/product";
 
 export class CreateProductMongoRepository implements ICreateProductRepository {
