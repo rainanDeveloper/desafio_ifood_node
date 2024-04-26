@@ -3,6 +3,8 @@ import { CreateProductMongoRepository } from "../../repositories/create-product/
 import { CreateProductController } from "../../controller/create-product/create-product.controller";
 import { GetProductsMongoRepository } from "../../repositories/get-products/get-products-mongo.repository";
 import { GetProductsController } from "../../controller/get-products/get-products.controller";
+import { UpdateProductMongoRepository } from "../../repositories/update-product/update-product-mongo.repository";
+import { UpdateProductController } from "../../controller/update-product/update-product.controller";
 
 const productRouter = Router();
 
@@ -28,6 +30,18 @@ productRouter.get("", async (req, res) => {
   const products = await getProductsController.handle();
   
   return res.status(products.statusCode).json(products.body);
+});
+
+productRouter.patch("/:id", async (req, res) => {
+  const updateProductRepository = new UpdateProductMongoRepository();
+  const updateProductController = new UpdateProductController(
+    updateProductRepository
+  );
+  const { params, body } = req;
+
+  const updatedProduct = await updateProductController.handle({ params, body });
+
+  return res.status(updatedProduct.statusCode).json(updatedProduct.body);
 });
 
 export { productRouter };
