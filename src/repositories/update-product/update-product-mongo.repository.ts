@@ -8,7 +8,7 @@ export class UpdateProductMongoRepository implements IUpdateProductRepository {
     const productCollection = MongoDBClient.getDbInstance().collection<Omit<Product, "id">>("products");
     
     await productCollection.findOneAndUpdate(
-      { id },
+      { _id: new ObjectId(id) },
       { $set: productParams },
     );
 
