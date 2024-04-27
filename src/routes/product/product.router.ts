@@ -7,6 +7,8 @@ import { UpdateProductMongoRepository } from "../../repositories/update-product/
 import { UpdateProductController } from "../../controller/update-product/update-product.controller";
 import { FindProductMongoRepository } from "../../repositories/find-product/find-product-mongo.repository";
 import { FindProductController } from "../../controller/find-product/find-product.controller";
+import { DeleteProductMongoRepository } from "../../repositories/delete-product/delete-product-mongo.repository";
+import { DeleteProductController } from "../../controller/delete-product/delete-product.controller";
 
 const productRouter = Router();
 
@@ -56,6 +58,19 @@ productRouter.get("/:id", async (req, res) => {
   const product = await findProductController.handle({ params });
 
   return res.status(product.statusCode).json(product.body);
+});
+
+productRouter.delete("/:id", async (req, res) => {
+  const deleteProductRepository = new DeleteProductMongoRepository();
+  const deleteProductController = new DeleteProductController(
+    deleteProductRepository
+  );
+
+  const { params } = req;
+
+  const deletedProduct = await deleteProductController.handle({ params });
+
+  return res.status(deletedProduct.statusCode).json(deletedProduct.body);
 });
 
 export { productRouter };
