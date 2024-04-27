@@ -9,13 +9,16 @@ import { FindProductMongoRepository } from "../../repositories/find-product/find
 import { FindProductController } from "../../controller/find-product/find-product.controller";
 import { DeleteProductMongoRepository } from "../../repositories/delete-product/delete-product-mongo.repository";
 import { DeleteProductController } from "../../controller/delete-product/delete-product.controller";
+import { AWSSNSService } from "../../services/aws-sns/aws-sns.service";
 
 const productRouter = Router();
 
 productRouter.post("", async (req, res) => {
   const createProductRepository = new CreateProductMongoRepository();
+  const AwsSnsService = new AWSSNSService();
   const createProductController = new CreateProductController(
-    createProductRepository
+    createProductRepository,
+    AwsSnsService,
   );
   
   const { body } = req;
@@ -38,8 +41,10 @@ productRouter.get("", async (req, res) => {
 
 productRouter.patch("/:id", async (req, res) => {
   const updateProductRepository = new UpdateProductMongoRepository();
+  const AwsSnsService = new AWSSNSService();
   const updateProductController = new UpdateProductController(
-    updateProductRepository
+    updateProductRepository,
+    AwsSnsService,
   );
   const { params, body } = req;
 
