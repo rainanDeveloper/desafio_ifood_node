@@ -1,4 +1,5 @@
 import { Product } from "../../models/product";
+import { IAWSSNSService } from "../../services/aws-sns/interfaces";
 import { HttpRequest, HttpResponse } from "../interfaces";
 import {
   CreateProductParams,
@@ -8,7 +9,10 @@ import {
 import { isValidCreateProductsParams } from "./utils";
 
 export class CreateProductController implements ICreateProductController {
-  constructor(private readonly productsRepository: ICreateProductRepository) {}
+  constructor(
+    private readonly productsRepository: ICreateProductRepository,
+    private readonly AWSSNSService: IAWSSNSService,
+  ) {}
   async handle(
     httpRequest: HttpRequest<CreateProductParams>
   ): Promise<HttpResponse<Product>> {
@@ -38,6 +42,10 @@ export class CreateProductController implements ICreateProductController {
       }
 
       const product = await this.productsRepository.createProduct(body);
+
+      await this.AWSSNSService.publish(
+        product.ownerId.toString(),
+      );
 
       return {
         statusCode: 201,

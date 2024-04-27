@@ -1,10 +1,14 @@
 import { Product } from "../../models/product";
+import { IAWSSNSService } from "../../services/aws-sns/interfaces";
 import { HttpRequest, HttpResponse } from "../interfaces";
 import { IUpdateProductController, IUpdateProductRepository, UpdateProductParams } from "./interfaces";
 import { isValidUpdateProductsParams } from "./utils";
 
 export class UpdateProductController implements IUpdateProductController {
-  constructor(private readonly updateProductRepository: IUpdateProductRepository) {}
+  constructor(
+    private readonly updateProductRepository: IUpdateProductRepository,
+    private readonly AWSSNSService: IAWSSNSService,
+  ) {}
 
   async handle(httpRequest: HttpRequest<UpdateProductParams>): Promise<HttpResponse<Product>> {
     try {
@@ -44,6 +48,10 @@ export class UpdateProductController implements IUpdateProductController {
       }
 
       const product = await this.updateProductRepository.updateProduct(id, body);
+
+      await this.AWSSNSService.publish(
+        product.ownerId.toString(),
+      );
 
       return {
         statusCode: 200,
